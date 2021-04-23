@@ -175,7 +175,7 @@ def action(action_type, state):
                             PROBS["target"][target] * PROBS["player"][player],
                         )
                     )
-    states
+    return states
 
 
 def observations(states):

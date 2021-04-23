@@ -102,21 +102,13 @@ def get_positions(x, y, max_x, max_y, positions=[]):
 
 
 def get_states():
-    positions = []
     states = []
-    get_positions(0, 0, ROWS, COLUMNS, positions)
-    for position_agent in positions:
-        for position_target in positions:
-            for call in [0, 1]:
-                states.append(
-                    State(
-                        position_agent[0],
-                        position_agent[1],
-                        position_target[0],
-                        position_target[1],
-                        call,
-                    )
-                )
+    for i in range(ROWS):
+        for j in range(COLUMNS):
+            for k in range(ROWS):
+                for l in range(COLUMNS):
+                    for b in [0, 1]:
+                        states.append(State(i, j, k, l, b))
     return states
 
 
@@ -301,16 +293,19 @@ if __name__ == "__main__":
     print(f"T: * : * : * {0.0}")
     states = {}
     for state in get_states():
+        # print("from state",str(state), state.index())
         for possiblity in actions(state):
             if (possiblity[2], state.index(), possiblity[0].index()) in states:
                 states[(possiblity[2], state.index(), possiblity[0].index())][
                     0
                 ] += possiblity[1]
+                # print("lol adding ", possiblity[2],state.index(),possiblity[0].index(),"add",possiblity[1])
             else:
                 states[(possiblity[2], state.index(), possiblity[0].index())] = [
                     possiblity[1],
                     possiblity[3],
                 ]
+                # print("lol new ", possiblity[2],state.index(),possiblity[0].index(),possiblity[1])
     for state in states:
         print(f"T: {state[0]} : {state[1]} : {state[2]} {states[state][0]}")
     observations(get_states())

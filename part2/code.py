@@ -179,40 +179,29 @@ def action(action_type, state):
 
 
 def observations(states):
-    lol = []
+    o = ["O: * : * : * 0.0"]
     for state in states:
         val = "O: * : "
-        if (
-            state.target_row == state.agent_row
-            and state.target_column == state.agent_column
-        ):
-            # same position
-            val += str(state.index()) + " o1 "
-            val += str(float(1))
-        elif (
-            state.target_row == state.agent_row
-            and state.agent_column == state.target_column - 1
-        ):
+        if state.target_row == state.agent_row and state.target_column == state.agent_column:
+            # same
+            val += str(state.index()) + " : o1 "
+        elif state.target_row == state.agent_row and state.target_column == state.agent_column + 1:
             # right
-            pass
-        elif (
-            state.target_row == state.agent_row + 1
-            and state.agent_column == state.target_column
-        ):
-            #
-            pass
-        elif (
-            state.target_row == state.agent_row
-            and state.agent_column == state.target_column - 1
-        ):
-            pass
-        elif (
-            state.target_row == state.agent_row
-            and state.agent_column == state.target_column - 1
-        ):
-            pass
-        elif (
-            state.target_row == state.agent_row
-            and state.agent_column == state.target_column - 1
-        ):
-            pass
+            val += str(state.index()) + " : o2 "
+        elif state.target_row == state.agent_row + 1 and state.target_column == state.agent_column:
+            # below
+            val += str(state.index()) + " : o3 "
+        elif state.target_row == state.agent_row and state.target_column == state.agent_column - 1:
+            # left
+            val += str(state.index()) + " : o4 "
+        elif state.target_row == state.agent_row - 1 and state.target_column == state.agent_column:
+            # above
+            val += str(state.index()) + " : o5 "
+        else:
+            # none
+            val += str(state.index()) + " : o6 "
+        val += str(float(1))
+        o.append(val)
+    for i in o:
+        print(i)
+    return o

@@ -260,7 +260,7 @@ def observations(states):
     return o
 
 
-def initial_states(states):
+def initial_states_q1(states):
     p = []
     n = 0
     for state in states:
@@ -280,6 +280,21 @@ def initial_states(states):
             p[i] = 1 / n
         print(p[i], end=" ")
 
+def initial_states_q2(states):
+    p = []
+    n = 0
+    for state in states:
+        if state.agent_row==1 and state.agent_column ==1 and (abs(state.agent_row - state.target_row)  +
+        abs(state.agent_column - state.target_column)) <= 1 and state.call==False:
+            p.append(1)
+            n+=1
+        else:
+            p.append(0)
+    for i in range(len(p)):
+        if p[i] == 1:
+            p[i] = 1 / n
+        print(p[i], end=" ")
+
 
 if __name__ == "__main__":
     print(f"discount: {GAMMA}")
@@ -288,7 +303,7 @@ if __name__ == "__main__":
     print("actions: UP DOWN LEFT RIGHT STAY ")
     print("observations: o1 o2 o3 o4 o5 o6")
     print("start:")
-    initial_states(get_states())
+    initial_states_q1(get_states())
     print()
     print(f"T: * : * : * {0.0}")
     states = {}

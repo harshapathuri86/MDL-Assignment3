@@ -1,4 +1,4 @@
-ROLL_NUMBER = 2019101105
+ROLL_NUMBER = 20191011105
 GAMMA = 0.5
 NUM_ACTIONS = 5
 ROWS = 2
@@ -295,6 +295,20 @@ def initial_states_q2(states):
             p[i] = 1 / n
         print(p[i], end=" ")
 
+def initial_states_q4(states):
+    p = []
+    for state in states:
+        if (state.target_row,state.target_column) in [(0,1),(0,2),(1,1),(1,2)]:
+            if state.agent_row == 0 and state.agent_column ==0:
+                p.append(0.25*0.4*0.5)
+            elif state.agent_row==1 and state.agent_column==3:
+                p.append(0.25*0.6*0.5)
+            else:
+                p.append(0)
+        else:
+            p.append(0)
+    for i in range(len(p)):
+        print(p[i], end=" ")
 
 if __name__ == "__main__":
     print(f"discount: {GAMMA}")

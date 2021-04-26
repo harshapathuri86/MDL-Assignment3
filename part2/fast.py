@@ -1,4 +1,4 @@
-ROLL_NUMBER = 2019101032
+ROLL_NUMBER = 2019101105
 GAMMA = 0.5
 NUM_ACTIONS = 5
 ROWS = 2
@@ -311,15 +311,15 @@ def initial_states_q4(states):
         print(p[i], end=" ")
 
 if __name__ == "__main__":
-    # print(f"discount: {GAMMA}")
-    # print("values: reward")
-    # print("states: 128")
-    # print("actions: UP DOWN LEFT RIGHT STAY ")
-    # print("observations: o1 o2 o3 o4 o5 o6")
-    # print("start:")
-    # initial_states_q1(get_states())
-    # print()
-    # print(f"T: * : * : * {0.0}")
+    print(f"discount: {GAMMA}")
+    print("values: reward")
+    print("states: 128")
+    print("actions: UP DOWN LEFT RIGHT STAY ")
+    print("observations: o1 o2 o3 o4 o5 o6")
+    print("start:")
+    initial_states_q1(get_states())
+    print()
+    print(f"T: * : * : * {0.0}")
     states = {}
     for state in get_states():
         # print("from state",str(state), state.index())
@@ -328,22 +328,18 @@ if __name__ == "__main__":
                 states[(possiblity[2], state.index(), possiblity[0].index())][
                     0
                 ] += possiblity[1]
-                if possiblity[2]=="STAY" and state.index()==1 and possiblity[0].index()==0:
-                    print("lol adding ", possiblity[2],state.index(),possiblity[0].index(),"add",possiblity[1])
             else:
                 states[(possiblity[2], state.index(), possiblity[0].index())] = [
                     possiblity[1],
                     possiblity[3],
                 ]
-                if possiblity[2]=="STAY" and state.index()==1 and possiblity[0].index()==0:
-                    print("lol new ", possiblity[2],state.index(),possiblity[0].index(),possiblity[1])
     lol=[]
     for state in states:
         # lol.append(round(states[state][0],3))
         print(f"T: {state[0]} : {state[1]} : {state[2]} {states[state][0]}")
     # lol.sort()
     # print(lol)
-    # observations(get_states())
-    # print(f"R: * : * : * : * {0.0}")
-    # for state in states:
-    #     print(f"R: {state[0]} : {state[1]} : {state[2]} : * {states[state][1]}")
+    observations(get_states())
+    print(f"R: * : * : * : * {0.0}")
+    for state in states:
+        print(f"R: {state[0]} : {state[1]} : {state[2]} : * {states[state][1]}")
